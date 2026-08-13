@@ -1,0 +1,16 @@
+Benchmark,Category,Items Public,Labels Public,Scoring Method Public,Evaluation Code Public,Construct Defined,Coverage Documented,Annotation Process Clear,Limitations Stated,Versioning/Maintenance,License/Reuse Clear,Total Score
+HELM,Holistic / transparency,2,2,2,2,2,2,1,2,2,2,19
+BBQ,Bias / fairness / QA,2,2,2,1,2,2,1,2,1,1,16
+StereoSet,Stereotype bias,2,2,2,2,2,2,1,1,1,1,16
+CrowS-Pairs,Stereotype bias,2,2,2,1,2,2,1,1,1,1,15
+RealToxicityPrompts,Toxicity / generation safety,2,2,2,2,2,1,1,2,1,1,16
+HateCheck,Hate-speech functionality tests,2,2,2,2,2,2,2,2,1,2,19
+ToxiGen,Hate / toxicity,2,2,2,2,2,2,2,1,1,1,17
+TruthfulQA,Truthfulness / misinformation / QA,2,2,2,2,2,2,1,1,2,1,17
+HarmBench,Safety / red-teaming evaluation,2,2,2,2,2,2,1,2,1,1,17
+JailbreakBench,Safety / jailbreak robustness,2,2,2,2,2,2,1,2,2,1,18
+BOLD,Bias / open-ended generation,2,2,2,1,2,2,1,1,1,1,15
+AdvBench,Safety / harmfulness / adversarial prompts,2,2,1,1,2,1,0,1,1,0,11
+BeaverTails,Safety alignment / helpfulness-harmlessness,2,2,2,1,2,2,2,1,2,1,17
+CEB,Bias / fairness / compositional,2,2,2,1,2,2,1,1,1,1,15
+WinoBias,Gender bias / coreference,2,2,2,1,2,2,1,1,1,1,15
