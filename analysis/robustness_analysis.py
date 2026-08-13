@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-VerifyBench robustness analysis excluding Monte Carlo perturbation.
+VerifyBench deterministic robustness analyses.
 
-Inputs
-------
+Input
+-----
 data/verifybench_primary_scores_canonical.csv
 
 Outputs
@@ -11,17 +11,27 @@ Outputs
 results/leave_one_dimension_out.csv
 results/alternative_weighting.csv
 
-Notes
------
-The leave-one-dimension-out analysis is fully specified and reproducible.
+This script intentionally separates deterministic robustness analyses from
+analysis/monte_carlo_robustness.py.
 
-The weighting scenarios below are explicit, transparent stress tests. If the
-paper ultimately reports a different historical set of weighting scenarios,
-replace SCENARIOS with those exact frozen weights and regenerate the output.
+IMPORTANT
+---------
+The earlier manuscript draft stated that removing "License/Reuse Clear"
+produced a mean absolute rank displacement of 6.1 positions. Recalculation
+from the canonical final 30 x 10 primary matrix does NOT reproduce that
+claim.
+
+Using tied average ranks and the final canonical matrix:
+    - Evaluation Code Public is the most influential single-dimension removal
+    - mean absolute rank displacement = 2.87 positions
+    - Spearman rho with the equal-weight primary totals = 0.916
+
+The output of this script is therefore the reproducible source of truth.
 """
 
 import csv
 from pathlib import Path
+
 import numpy as np
 from scipy.stats import rankdata, spearmanr
 
@@ -42,67 +52,105 @@ DIMENSIONS = [
     "License/Reuse Clear",
 ]
 
-with (DATA / "verifybench_primary_scores_canonical.csv").open(
-    newline="", encoding="utf-8-sig"
-) as f:
-    rows = list(csv.DictReader(f))
 
-benchmarks = [r["Benchmark"] for r in rows]
-X = np.array([[float(r[d]) for d in DIMENSIONS] for r in rows])
+def load_primary():
+    with (DATA / "verifybench_primary_scores_canonical.csv").open(
+        newline="", encoding="utf-8-sig"
+    ) as f:
+        rows = list(csv.DictReader(f))
 
+    x = np.array(
+        [[float(row[d]) for d in DIMENSIONS] for row in rows],
+        dtype=float,
+    )
+    benchmarks = [row["Benchmark"] for row in rows]
+    return benchmarks, x
+
+
+benchmarks, X = load_primary()
 base_totals = X.sum(axis=1)
 base_ranks = rankdata(-base_totals, method="average")
 
+# -------------------------------------------------------------------------
+# Leave-one-dimension-out analysis
+# -------------------------------------------------------------------------
 loo_rows = []
-for j, dim in enumerate(DIMENSIONS):
-    totals = X.sum(axis=1) - X[:, j]
-    ranks = rankdata(-totals, method="average")
-    disp = np.abs(ranks - base_ranks)
-    rho = spearmanr(base_totals, totals).statistic
+
+for j, dimension in enumerate(DIMENSIONS):
+    reduced_totals = base_totals - X[:, j]
+    reduced_ranks = rankdata(-reduced_totals, method="average")
+    displacement = np.abs(reduced_ranks - base_ranks)
+    rho = spearmanr(base_totals, reduced_totals).statistic
+
     loo_rows.append({
-        "Removed Dimension": dim,
+        "Removed Dimension": dimension,
         "Spearman Rho with Primary": round(float(rho), 3),
-        "Mean Absolute Rank Displacement": round(float(disp.mean()), 2),
-        "Median Absolute Rank Displacement": round(float(np.median(disp)), 2),
-        "Maximum Absolute Rank Displacement": round(float(disp.max()), 2),
+        "Mean Absolute Rank Displacement": round(float(displacement.mean()), 2),
+        "Median Absolute Rank Displacement": round(float(np.median(displacement)), 2),
+        "Maximum Absolute Rank Displacement": round(float(displacement.max()), 2),
     })
 
-# Explicit sensitivity scenarios around equal weighting.
-# Each vector follows the DIMENSIONS order above.
+# -------------------------------------------------------------------------
+# Alternative weighting stress tests
+# -------------------------------------------------------------------------
+# These are explicit, fixed sensitivity scenarios defined for the released
+# reproducibility package. They are not claimed to be empirically estimated
+# importance weights.
+#
+# Dimension order follows DIMENSIONS above.
 SCENARIOS = {
     "Equal weights": np.ones(10),
-    "Access emphasis": np.array([1.5,1.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]),
-    "Reproducibility emphasis": np.array([1.0,1.0,1.5,1.5,1.0,1.0,1.0,1.0,1.0,1.0]),
-    "Documentation emphasis": np.array([1.0,1.0,1.0,1.0,1.25,1.25,1.25,1.25,1.0,1.0]),
-    "Lifecycle/reuse emphasis": np.array([1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.5,1.5]),
-    "Reduced access weight": np.array([0.5,0.5,1.0,1.0,1.0,1.0,1.0,1.0,1.0,1.0]),
+    "Access emphasis": np.array(
+        [1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    ),
+    "Reproducibility emphasis": np.array(
+        [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    ),
+    "Documentation emphasis": np.array(
+        [1.0, 1.0, 1.0, 1.0, 1.25, 1.25, 1.25, 1.25, 1.0, 1.0]
+    ),
+    "Lifecycle/reuse emphasis": np.array(
+        [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 1.5]
+    ),
+    "Reduced access weight": np.array(
+        [0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    ),
 }
 
 weight_rows = []
-for name, w in SCENARIOS.items():
-    totals = (X * w).sum(axis=1)
-    ranks = rankdata(-totals, method="average")
-    rho = spearmanr(base_totals, totals).statistic
-    disp = np.abs(ranks - base_ranks)
+
+for name, weights in SCENARIOS.items():
+    weighted_totals = (X * weights).sum(axis=1)
+    weighted_ranks = rankdata(-weighted_totals, method="average")
+    displacement = np.abs(weighted_ranks - base_ranks)
+    rho = spearmanr(base_totals, weighted_totals).statistic
+
     weight_rows.append({
         "Scenario": name,
         "Spearman Rho with Primary": round(float(rho), 3),
-        "Mean Absolute Rank Displacement": round(float(disp.mean()), 2),
-        "Median Absolute Rank Displacement": round(float(np.median(disp)), 2),
-        "Maximum Absolute Rank Displacement": round(float(disp.max()), 2),
+        "Mean Absolute Rank Displacement": round(float(displacement.mean()), 2),
+        "Median Absolute Rank Displacement": round(float(np.median(displacement)), 2),
+        "Maximum Absolute Rank Displacement": round(float(displacement.max()), 2),
     })
+
 
 def write_csv(path, rows):
     with path.open("w", newline="", encoding="utf-8") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
-        w.writeheader()
-        w.writerows(rows)
+        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        writer.writeheader()
+        writer.writerows(rows)
+
 
 write_csv(RESULTS / "leave_one_dimension_out.csv", loo_rows)
 write_csv(RESULTS / "alternative_weighting.csv", weight_rows)
 
-print("Most influential dimension removal:")
-print(max(loo_rows, key=lambda r: r["Mean Absolute Rank Displacement"]))
-print("\nWeighting scenarios:")
-for r in weight_rows:
-    print(r)
+most_influential = max(
+    loo_rows,
+    key=lambda row: row["Mean Absolute Rank Displacement"],
+)
+
+print("Most influential single-dimension removal:")
+print(most_influential)
+print("\nAlternative weighting scenarios:")
+for row in weight_rows:
+    print(row)
