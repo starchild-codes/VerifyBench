@@ -1,0 +1,31 @@
+Benchmark,Items Public,Labels Public,Scoring Method Public,Evaluation Code Public,Construct Defined,Coverage Documented,Annotation Process Clear,Limitations Stated,Versioning/Maintenance,License/Reuse Clear,Total Score
+HELM,1,1,2,2,2,2,1,2,2,1,16
+VHELM,1,1,2,2,1,2,1,2,1,1,14
+BBQ,1,2,2,1,2,2,2,2,1,2,17
+TruthfulQA,2,2,1,1,2,2,2,2,2,2,18
+RealToxicityPrompts,1,2,1,1,1,1,1,2,1,1,12
+StereoSet,1,2,2,2,2,2,2,2,1,2,18
+CrowS-Pairs,1,2,2,2,2,2,2,2,1,1,17
+BOLD,1,2,1,1,2,2,2,2,1,1,15
+ToxiGen,1,2,1,1,2,2,2,2,1,2,16
+HateCheck,1,2,2,2,2,2,2,2,1,1,17
+ToxicChat,2,2,2,1,1,2,2,2,2,2,18
+XSTest,1,2,2,1,2,2,2,2,1,2,17
+Do-Not-Answer,1,2,2,1,2,2,1,2,1,2,16
+SafetyBench,1,2,2,1,2,2,1,2,1,1,15
+HarmBench,1,2,2,2,2,2,1,2,1,1,16
+JailbreakBench,2,2,2,2,2,2,1,2,2,2,19
+BeaverTails,2,2,1,1,2,2,2,2,1,1,16
+TrustLLM,1,1,2,2,2,1,1,1,2,1,14
+DecodingTrust,1,1,2,2,2,1,1,2,1,1,14
+CEB,1,1,1,1,2,2,1,2,1,1,13
+HONEST,2,2,2,2,2,1,1,2,1,1,16
+WinoMT,1,2,2,2,2,2,1,2,1,1,16
+ETHICS,1,2,2,2,2,2,2,2,1,1,17
+HolisticBias,2,2,2,2,2,2,1,2,1,2,18
+UnQover,1,2,2,2,2,2,1,2,1,1,16
+Winogender Schemas,1,2,2,1,2,2,1,2,1,2,16
+WinoBias,1,2,2,1,2,2,1,2,1,1,15
+CivilComments / Jigsaw Unintended Bias,2,2,2,1,2,2,1,2,2,2,18
+HaluEval,1,2,2,2,2,2,1,2,1,1,16
+AdvBench,1,2,1,2,2,1,1,1,1,1,13
