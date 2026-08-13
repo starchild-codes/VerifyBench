@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "If you use VerifyBench, please cite the accompanying paper."
+title: "VerifyBench: Auditing Public Verifiability in Responsible-AI Benchmarks for Foundation Models"
+type: software
+version: "1.0.0"
+date-released: "2026-08-13"
+authors:
+  - family-names: "Anonymous"
+    given-names: "Submission"
+abstract: "Reproducibility package for VerifyBench, a structured audit of public verifiability across 30 responsible-AI benchmarks for language and foundation models."
+keywords:
+  - AI assurance
+  - benchmark auditing
+  - foundation models
+  - public verifiability
+  - responsible AI
+  - trustworthy AI
+license: MIT
