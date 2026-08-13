@@ -1,0 +1,31 @@
+Benchmark,Category,Included,Notes
+HELM,Holistic / trustworthiness,TRUE,Detailed category: Holistic / transparency
+VHELM,Holistic / trustworthiness,TRUE,Detailed category: Holistic / multimodal / transparency
+BBQ,Bias / fairness,TRUE,Detailed category: Bias / fairness / QA
+TruthfulQA,Truthfulness / hallucination,TRUE,Detailed category: Truthfulness / misinformation / QA
+RealToxicityPrompts,Toxicity / hate,TRUE,Detailed category: Toxicity / generation safety
+StereoSet,Bias / fairness,TRUE,Detailed category: Stereotype bias
+CrowS-Pairs,Bias / fairness,TRUE,Detailed category: Stereotype bias
+BOLD,Bias / fairness,TRUE,Detailed category: Bias / open-ended generation
+ToxiGen,Toxicity / hate,TRUE,Detailed category: Hate / toxicity
+HateCheck,Toxicity / hate,TRUE,Detailed category: Hate-speech functionality tests
+ToxicChat,Toxicity / hate,TRUE,Detailed category: Toxicity / chat prompts
+XSTest,Safety / harmfulness,TRUE,Detailed category: Safety / over-refusal
+Do-Not-Answer,Safety / harmfulness,TRUE,Detailed category: Safety / refusal
+SafetyBench,Safety / harmfulness,TRUE,Detailed category: Safety / multilingual
+HarmBench,Safety / harmfulness,TRUE,Detailed category: Safety / red-teaming evaluation
+JailbreakBench,Safety / harmfulness,TRUE,Detailed category: Safety / jailbreak robustness
+BeaverTails,Safety / harmfulness,TRUE,Detailed category: Safety alignment / helpfulness-harmlessness
+TrustLLM,Holistic / trustworthiness,TRUE,Detailed category: Trustworthiness suite
+DecodingTrust,Holistic / trustworthiness,TRUE,Detailed category: Trustworthiness suite
+CEB,Bias / fairness,TRUE,Detailed category: Bias / fairness / compositional
+HONEST,Bias / fairness,TRUE,Detailed category: Hurtful completion / multilingual bias
+WinoMT,Bias / fairness,TRUE,Detailed category: Gender bias / machine translation
+ETHICS,Ethics / values,TRUE,Detailed category: Machine ethics / values
+HolisticBias,Bias / fairness,TRUE,Detailed category: Demographic bias / generation
+UnQover,Bias / fairness,TRUE,Detailed category: Stereotype bias / QA
+Winogender Schemas,Bias / fairness,TRUE,Detailed category: Gender bias / coreference
+WinoBias,Bias / fairness,TRUE,Detailed category: Gender bias / coreference
+CivilComments / Jigsaw Unintended Bias,Bias / fairness,TRUE,Detailed category: Toxicity / unintended bias
+HaluEval,Truthfulness / hallucination,TRUE,Detailed category: Hallucination / truthfulness
+AdvBench,Safety / harmfulness,TRUE,Detailed category: Safety / harmfulness / adversarial prompts
