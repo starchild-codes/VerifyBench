@@ -1,0 +1,3 @@
+Layer,Mean Total,Median Total,Minimum,Maximum,Benchmarks 18-20,Totals Changed,Mean Absolute Score Change,Median Absolute Score Change,Changed by >=2 Points,Changed by >=3 Points,Spearman Rho with Primary,Two-sided P,Mean Absolute Rank Displacement,Median Absolute Rank Displacement,Maximum Absolute Rank Displacement,Increased,Decreased,Unchanged
+Lenient,19.47,20.0,18,20,30,29,3.43,3.0,26,24,0.325,0.079,6.77,6.5,21.5,29,0,1
+Operationalized,15.97,16.0,12,19,6,26,1.73,1.0,13,7,0.088,0.642,9.23,7.5,25.0,13,13,4

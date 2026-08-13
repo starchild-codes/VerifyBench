@@ -1,0 +1,11 @@
+Removed Dimension,Spearman Rho with Primary,Mean Absolute Rank Displacement,Median Absolute Rank Displacement,Maximum Absolute Rank Displacement
+Items Public,1.0,0.0,0.0,0.0
+Labels Public,1.0,0.0,0.0,0.0
+Scoring Method Public,1.0,0.0,0.0,0.0
+Evaluation Code Public,0.916,2.87,3.5,5.5
+Construct Defined,1.0,0.0,0.0,0.0
+Coverage Documented,0.974,0.93,0.5,7.5
+Annotation Process Clear,0.965,1.63,1.5,5.5
+Limitations Stated,0.942,2.1,1.5,7.5
+Versioning/Maintenance,0.976,1.1,1.0,6.0
+License/Reuse Clear,0.998,0.23,0.0,1.5

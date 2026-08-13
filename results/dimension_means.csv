@@ -1,0 +1,31 @@
+Layer,Dimension,Mean Score
+Primary,Items Public,2
+Primary,Labels Public,2
+Primary,Scoring Method Public,1.93
+Primary,Evaluation Code Public,1.53
+Primary,Construct Defined,1.97
+Primary,Coverage Documented,1.87
+Primary,Annotation Process Clear,1.17
+Primary,Limitations Stated,1.33
+Primary,Versioning/Maintenance,1.17
+Primary,License/Reuse Clear,1.07
+Lenient,Items Public,2
+Lenient,Labels Public,2
+Lenient,Scoring Method Public,2
+Lenient,Evaluation Code Public,1.87
+Lenient,Construct Defined,2
+Lenient,Coverage Documented,2
+Lenient,Annotation Process Clear,2
+Lenient,Limitations Stated,2
+Lenient,Versioning/Maintenance,1.63
+Lenient,License/Reuse Clear,1.97
+Operationalized,Items Public,1.23
+Operationalized,Labels Public,1.83
+Operationalized,Scoring Method Public,1.77
+Operationalized,Evaluation Code Public,1.53
+Operationalized,Construct Defined,1.9
+Operationalized,Coverage Documented,1.83
+Operationalized,Annotation Process Clear,1.37
+Operationalized,Limitations Stated,1.93
+Operationalized,Versioning/Maintenance,1.2
+Operationalized,License/Reuse Clear,1.37

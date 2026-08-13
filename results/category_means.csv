@@ -1,0 +1,19 @@
+Layer,Category,N,Mean Total
+Primary,Bias / fairness,12,15.08
+Primary,Ethics / values,1,16
+Primary,Holistic / trustworthiness,4,17.75
+Primary,Safety / harmfulness,7,16.29
+Primary,Toxicity / hate,4,16.75
+Primary,Truthfulness / hallucination,2,16
+Lenient,Bias / fairness,12,19.25
+Lenient,Ethics / values,1,19
+Lenient,Holistic / trustworthiness,4,20
+Lenient,Safety / harmfulness,7,19.71
+Lenient,Toxicity / hate,4,19.25
+Lenient,Truthfulness / hallucination,2,19.5
+Operationalized,Bias / fairness,12,16.25
+Operationalized,Ethics / values,1,17
+Operationalized,Holistic / trustworthiness,4,14.5
+Operationalized,Safety / harmfulness,7,16
+Operationalized,Toxicity / hate,4,15.75
+Operationalized,Truthfulness / hallucination,2,17

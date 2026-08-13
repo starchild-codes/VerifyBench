@@ -1,0 +1,61 @@
+Benchmark,Layer,Primary Total,Alternative Total,Score Change,Primary Rank,Alternative Rank,Absolute Rank Displacement
+HELM,Lenient,19,20,1,2.0,8.5,6.5
+VHELM,Lenient,19,20,1,2.0,8.5,6.5
+BBQ,Lenient,16,19,3,15.5,22.5,7.0
+TruthfulQA,Lenient,17,20,3,8.5,8.5,0.0
+RealToxicityPrompts,Lenient,16,19,3,15.5,22.5,7.0
+StereoSet,Lenient,16,20,4,15.5,8.5,7.0
+CrowS-Pairs,Lenient,15,19,4,24.0,22.5,1.5
+BOLD,Lenient,15,19,4,24.0,22.5,1.5
+ToxiGen,Lenient,17,20,3,8.5,8.5,0.0
+HateCheck,Lenient,19,19,0,2.0,22.5,20.5
+ToxicChat,Lenient,15,19,4,24.0,22.5,1.5
+XSTest,Lenient,18,19,1,4.5,22.5,18.0
+Do-Not-Answer,Lenient,17,19,2,8.5,22.5,14.0
+SafetyBench,Lenient,16,20,4,15.5,8.5,7.0
+HarmBench,Lenient,17,20,3,8.5,8.5,0.0
+JailbreakBench,Lenient,18,20,2,4.5,8.5,4.0
+BeaverTails,Lenient,17,20,3,8.5,8.5,0.0
+TrustLLM,Lenient,17,20,3,8.5,8.5,0.0
+DecodingTrust,Lenient,16,20,4,15.5,8.5,7.0
+CEB,Lenient,15,19,4,24.0,22.5,1.5
+HONEST,Lenient,16,20,4,15.5,8.5,7.0
+WinoMT,Lenient,16,20,4,15.5,8.5,7.0
+ETHICS,Lenient,16,19,3,15.5,22.5,7.0
+HolisticBias,Lenient,15,20,5,24.0,8.5,15.5
+UnQover,Lenient,15,19,4,24.0,22.5,1.5
+Winogender Schemas,Lenient,15,18,3,24.0,29.5,5.5
+WinoBias,Lenient,15,18,3,24.0,29.5,5.5
+CivilComments / Jigsaw Unintended Bias,Lenient,12,20,8,29.0,8.5,20.5
+HaluEval,Lenient,15,19,4,24.0,22.5,1.5
+AdvBench,Lenient,11,20,9,30.0,8.5,21.5
+HELM,Operationalized,19,16,-3,2.0,16.5,14.5
+VHELM,Operationalized,19,14,-5,2.0,26.0,24.0
+BBQ,Operationalized,16,17,1,15.5,9.0,6.5
+TruthfulQA,Operationalized,17,18,1,8.5,4.0,4.5
+RealToxicityPrompts,Operationalized,16,12,-4,15.5,30.0,14.5
+StereoSet,Operationalized,16,18,2,15.5,4.0,11.5
+CrowS-Pairs,Operationalized,15,17,2,24.0,9.0,15.0
+BOLD,Operationalized,15,15,0,24.0,23.0,1.0
+ToxiGen,Operationalized,17,16,-1,8.5,16.5,8.0
+HateCheck,Operationalized,19,17,-2,2.0,9.0,7.0
+ToxicChat,Operationalized,15,18,3,24.0,4.0,20.0
+XSTest,Operationalized,18,17,-1,4.5,9.0,4.5
+Do-Not-Answer,Operationalized,17,16,-1,8.5,16.5,8.0
+SafetyBench,Operationalized,16,15,-1,15.5,23.0,7.5
+HarmBench,Operationalized,17,16,-1,8.5,16.5,8.0
+JailbreakBench,Operationalized,18,19,1,4.5,1.0,3.5
+BeaverTails,Operationalized,17,16,-1,8.5,16.5,8.0
+TrustLLM,Operationalized,17,14,-3,8.5,26.0,17.5
+DecodingTrust,Operationalized,16,14,-2,15.5,26.0,10.5
+CEB,Operationalized,15,13,-2,24.0,28.5,4.5
+HONEST,Operationalized,16,16,0,15.5,16.5,1.0
+WinoMT,Operationalized,16,16,0,15.5,16.5,1.0
+ETHICS,Operationalized,16,17,1,15.5,9.0,6.5
+HolisticBias,Operationalized,15,18,3,24.0,4.0,20.0
+UnQover,Operationalized,15,16,1,24.0,16.5,7.5
+Winogender Schemas,Operationalized,15,16,1,24.0,16.5,7.5
+WinoBias,Operationalized,15,15,0,24.0,23.0,1.0
+CivilComments / Jigsaw Unintended Bias,Operationalized,12,18,6,29.0,4.0,25.0
+HaluEval,Operationalized,15,16,1,24.0,16.5,7.5
+AdvBench,Operationalized,11,13,2,30.0,28.5,1.5

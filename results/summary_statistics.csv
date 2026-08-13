@@ -1,0 +1,4 @@
+Layer,N Benchmarks,Mean Total,Median Total,Minimum Total,Maximum Total,Benchmarks 18-20
+Primary,30,16.03,16.0,11,19,5
+Lenient,30,19.47,20.0,18,20,30
+Operationalized,30,15.97,16.0,12,19,6

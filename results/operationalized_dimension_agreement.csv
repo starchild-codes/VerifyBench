@@ -1,0 +1,11 @@
+Dimension,N,Exact Agreement,Exact Agreement Percent
+Items Public,15,0.733,73.3
+Labels Public,15,0.6,60.0
+Scoring Method Public,15,0.867,86.7
+Evaluation Code Public,15,0.8,80.0
+Construct Defined,15,0.933,93.3
+Coverage Documented,15,0.867,86.7
+Annotation Process Clear,15,0.8,80.0
+Limitations Stated,15,0.8,80.0
+Versioning/Maintenance,15,0.867,86.7
+License/Reuse Clear,15,0.533,53.3
