@@ -223,6 +223,3 @@ This repository records public evidence about third-party benchmarks. It does no
 
 Citation metadata are provided in `CITATION.cff`.
 
-## Status
-
-This repository corresponds to the VerifyBench manuscript and reproducibility package prepared in 2026. Before submission or public archival, confirm that repository numbers, manuscript wording, and any anonymization requirements remain synchronized.
