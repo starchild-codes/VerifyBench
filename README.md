@@ -1,8 +1,12 @@
 # VerifyBench
 
-VerifyBench is a structured audit of **public verifiability** in responsible-AI benchmarks for language and foundation models.
+VerifyBench is the camera-ready reproducibility package for *VerifyBench: Auditing Public Verifiability in Responsible-AI Benchmarks for Foundation Models* (IEEE TPS 2026). It audits 30 responsible-AI benchmarks across 10 public-verifiability dimensions using a 0–2 ordinal rubric, for 300 benchmark-dimension decisions per complete scoring layer.
 
-The study evaluates 30 benchmarks across 10 public-verifiability dimensions using a 0–2 ordinal rubric, yielding 300 benchmark-dimension decisions per scoring layer. The repository contains the final primary/adjudicated scores, two complete post-hoc rescoring layers, reliability records, evidence summaries, analysis scripts, robustness analyses, generated figures, and supplementary materials used to reproduce the paper's reported results.
+The repository includes the adjudicated primary layer, post-hoc lenient artifact-presence and operationalized layers, reliability records, deterministic and Monte Carlo robustness analyses, evidence records, and the four camera-ready paper figures.
+
+## Sampling scope
+
+The 30-benchmark sample is purposive, cross-category, and predominantly language-focused. VHELM was deliberately included as a multimodal/foundation-model case. The study does not claim systematic coverage of multimodal evaluation or a representative census of responsible-AI benchmarks.
 
 ## Repository structure
 
@@ -10,77 +14,43 @@ The study evaluates 30 benchmarks across 10 public-verifiability dimensions usin
 VerifyBench/
 ├── README.md
 ├── REPO_CONSISTENCY.md
-├── LICENSE
+├── CHANGELOG.md
 ├── CITATION.cff
 ├── requirements.txt
-│
 ├── data/
-│   ├── VerifyBench_Final_Primary_Adjudicated_30x10.xlsx
 │   ├── verifybench_primary_scores_canonical.csv
 │   ├── lenient_scores.csv
 │   ├── operationalized_scores.csv
 │   ├── benchmark_list.csv
 │   └── evidence_log.csv
-│
-├── rubrics/
-│   ├── primary_rubric.md
-│   └── operationalized_rubric.md
-│
 ├── reliability/
-│   ├── coder1_primary.csv
-│   ├── coder2_primary.csv
-│   ├── primary_adjudicated.csv
-│   ├── coder1_operationalized.csv
-│   └── coder2_operationalized.csv
-│
+├── rubrics/
 ├── analysis/
 │   ├── descriptive_analysis.py
 │   ├── reliability_analysis.py
 │   ├── sensitivity_analysis.py
 │   ├── robustness_analysis.py
 │   ├── monte_carlo_robustness.py
-│   └── generate_figures.py
-│
+│   ├── generate_figures.py
+│   └── validate_camera_ready.py
 ├── results/
-│   ├── summary_statistics.csv
-│   ├── dimension_means.csv
-│   ├── category_means.csv
-│   ├── reliability_results.csv
-│   ├── operationalized_dimension_agreement.csv
-│   ├── sensitivity_results.csv
-│   ├── benchmark_level_sensitivity.csv
-│   ├── leave_one_dimension_out.csv
-│   ├── alternative_weighting.csv
-│   └── monte_carlo_results.csv
-│
 ├── figures/
 │   ├── fig1.png
 │   ├── fig2.png
 │   ├── fig3.png
 │   ├── fig4.png
-│   └── fig5.png
-│
+│   └── legacy/fig5_draft_sensitivity_overview.png
 └── supplement/
     ├── README.md
+    ├── verifybench_analysis_package_camera_ready.xlsx
     └── verifybench_analysis_package.xlsx
 ```
 
-## Canonical source of truth
+The older workbook and draft figure are retained only as labeled legacy artifacts. They are not the camera-ready source of truth.
 
-The canonical primary score matrix is:
+## Canonical score matrices
 
-```text
-data/verifybench_primary_scores_canonical.csv
-```
-
-It contains the final adjudicated 30 × 10 primary matrix used for the manuscript. It reproduces:
-
-- mean total score: **16.03 / 20**
-- median: **16**
-- range: **11–19**
-- benchmarks scoring 18–20: **5**
-
-The final lenient and operationalized layers reproduce:
+The canonical primary matrix is `data/verifybench_primary_scores_canonical.csv`. The complete alternative layers are `data/lenient_scores.csv` and `data/operationalized_scores.csv`.
 
 | Layer | Mean | Median | Range | Benchmarks scoring 18–20 |
 |---|---:|---:|---:|---:|
@@ -88,113 +58,77 @@ The final lenient and operationalized layers reproduce:
 | Lenient | 19.47 | 20 | 18–20 | 30 |
 | Operationalized | 15.97 | 16 | 12–19 | 6 |
 
-Do not substitute earlier working spreadsheets for the canonical primary matrix.
-
-## Reliability
+## Reliability and analysis layers
 
 The same purposive 15-benchmark subset (150 benchmark-dimension decisions) was independently coded by the same coder pair under both rubrics.
 
-Primary rubric:
+| Layer | Exact agreement | Cohen's κ | Linear-weighted κ |
+|---|---:|---:|---:|
+| Primary | 76.0% | 0.490 | 0.508 |
+| Operationalized | 78.0% | 0.574 | 0.574 |
 
-- exact agreement: **76.0%**
-- Cohen's κ: **0.490**
-- linear-weighted κ: **0.508**
+Primary disagreements in the double-coded subset were adjudicated, and those adjudicated values feed the complete primary analysis. In the operationalized exercise, Coder 2 ratings are used for reliability estimation only. Coder 1's frozen operationalized scores form the complete 30-benchmark operationalized analysis layer. Operationalized disagreements were not converted into a separate consensus or adjudicated layer; the remaining 15 operationalized benchmarks were single-coded.
 
-Operationalized rubric:
+## Post-hoc sensitivity layers
 
-- exact agreement: **78.0%**
-- Cohen's κ: **0.574**
-- linear-weighted κ: **0.574**
+Both alternative scoring layers are post-hoc. The lenient layer was single-coded. The operationalized round occurred later and involved renewed examination of public sources. Primary-to-operationalized differences may therefore reflect changed evidentiary thresholds, newly located evidence, and coder familiarity. They are not a causal estimate of rubric wording alone.
 
-The operationalized exercise occurred later, so the difference should not be interpreted as a causal estimate of the effect of rubric wording alone.
+The lenient layer changed 29 of 30 totals, with Spearman's ρ = 0.325 and mean absolute rank displacement = 6.77. The operationalized layer changed 26 of 30 totals (13 increased, 13 decreased, and 4 were unchanged), with Spearman's ρ = 0.088 and mean absolute rank displacement = 9.23.
 
-## Sensitivity analysis
+## Deterministic robustness
 
-Two complete post-hoc rescoring layers were applied to all 300 benchmark-dimension cells.
+The leave-one-dimension-out analysis uses tied average ranks. Removing Evaluation Code Public is most influential: mean absolute rank displacement = 2.87 and Spearman's ρ with the full equal-weight ordering = 0.916.
 
-The lenient artifact-presence interpretation produced:
+Table III uses the following transparent sensitivity scenarios. All unspecified dimensions retain weight 1.00; these settings are not empirically estimated importance weights.
 
-- mean: **19.47**
-- 29 of 30 totals changed from primary
-- Spearman's ρ with primary: **0.325**
-- mean absolute rank displacement: **6.77**
+| Scenario | Changed weights | Spearman's ρ with primary |
+|---|---|---:|
+| Baseline | all dimensions = 1.00 | 1.000 |
+| Reproduction | Items, Labels, Scoring Method, Evaluation Code = 1.25 | 0.994 |
+| Documentation | Construct, Coverage, Annotation, Limitations = 1.25 | 0.993 |
+| Lifecycle/reuse | Versioning/Maintenance, License/Reuse = 1.50 | 0.997 |
+| Artifact access | Items, Labels = 1.50 | 1.000 |
+| Operational completeness | Scoring Method, Evaluation Code, Limitations, Versioning/Maintenance, License/Reuse = 1.25 | 0.993 |
 
-The operationalized interpretation produced:
+## Monte Carlo robustness
 
-- mean: **15.97**
-- 26 of 30 totals changed from primary
-- Spearman's ρ with primary: **0.088**
-- mean absolute rank displacement: **9.23**
+The Monte Carlo stress test adds independent zero-mean Gaussian noise to every cell of the adjudicated primary 30 × 10 matrix, rounds to the nearest ordinal category, clips scores to [0, 2], and recomputes tied average ranks. Spearman correlation is measured against the unperturbed primary totals. Each sigma uses 10,000 simulations, fixed seed `20260813`, and the central 95% simulation interval.
 
-## Deterministic robustness analysis
+The camera-ready grid is σ ∈ {0.25, 0.43, 0.50, 0.75, 1.00}. Sigma 0.43 is a heuristic calibration to the primary exercise's 24% coder-disagreement rate: for an interior ordinal category, Gaussian noise crosses a ±0.5 rounding threshold with probability about 0.24 when σ is approximately 0.43. Sigma 0.10 was removed because it almost never changes a rounded ordinal score.
 
-Leave-one-dimension-out analysis was recomputed from the final canonical 30 × 10 primary matrix using tied average ranks.
+Boundary clipping at 0 and 2 makes perturbations asymmetric for saturated dimensions. This analysis is therefore a model-based stress test, not an empirical model of coder error. The observed primary-to-operationalized ρ of 0.088 is substantially lower than the Monte Carlo mean ρ at σ = 1.00 (about 0.414), so the tested random-noise model does not explain the implemented protocol shift.
 
-The most influential single-dimension removal was:
+The deterministic repository implementation uses one NumPy `default_rng` stream, consumed sequentially in the sigma order above. Its regenerated results are:
 
-- removed dimension: **Evaluation Code Public**
-- mean absolute rank displacement: **2.87 positions**
-- Spearman's ρ with the full equal-weight totals: **0.916**
+| Sigma | Mean ρ | Central 95% simulation interval | Mean absolute rank displacement |
+|---:|---:|---:|---:|
+| 0.25 | 0.928 | 0.848–0.979 | 1.95 |
+| 0.43 | 0.716 | 0.519–0.863 | 4.77 |
+| 0.50 | 0.664 | 0.454–0.834 | 5.25 |
+| 0.75 | 0.517 | 0.229–0.747 | 6.45 |
+| 1.00 | 0.415 | 0.101–0.686 | 7.21 |
 
-The explicit alternative-weighting stress tests in `analysis/robustness_analysis.py` produced rank correlations of **0.993–1.000** with the equal-weight primary ordering across the non-baseline scenarios.
+These deterministic values differ slightly from several manuscript-rounded entries; the generated CSV is not hand-edited. See `REPO_CONSISTENCY.md` for the explicit discrepancy note.
 
-These weighting scenarios are transparent sensitivity tests defined in the released reproducibility package; they are not empirically estimated importance weights.
+## Camera-ready figures
 
-## Monte Carlo robustness analysis
+- `figures/fig1.png`: primary and operationalized mean scores across all 10 dimensions.
+- `figures/fig2.png`: 30 × 10 primary score heatmap.
+- `figures/fig3.png`: descriptive category mean primary total scores.
+- `figures/fig4.png`: three-layer aggregate and benchmark-level sensitivity overview.
 
-The Monte Carlo stress test uses the final adjudicated 30 × 10 primary matrix.
-
-For each uncertainty level, independent zero-mean Gaussian perturbations are added to every cell, perturbed values are rounded to the nearest valid ordinal score and clipped to the 0–2 rubric range, and benchmark totals/ranks are recomputed.
-
-The analysis uses:
-
-- σ ∈ {0.10, 0.25, 0.50, 0.75, 1.00}
-- 10,000 simulations per σ
-- fixed random seed: `20260813`
-
-Selected results:
-
-- σ = 0.25: mean Spearman's ρ = **0.927**, mean absolute rank displacement = **1.96**
-- σ = 0.50: mean Spearman's ρ = **0.664**, mean absolute rank displacement = **5.25**
-
-The simulation is a model-based stress test, not an empirical estimate of the true distribution of coder error.
-
-## Evidence log
-
-`data/evidence_log.csv` contains one row for each of the 300 benchmark-dimension cells and links the three scoring layers to the available evidence record.
-
-Fields include:
-
-- benchmark and category
-- dimension
-- primary score
-- lenient score
-- operationalized score
-- evidence source URLs
-- general evidence note
-- dimension-specific evidence summary
-- lenient decision rationale
-- operationalized decision rationale
-- evidence-review date where available
-- evidence status
-
-Evidence summaries are provided as audit records. They should not be interpreted as complete reproductions of third-party benchmark documentation or as verbatim excerpts unless explicitly marked as such.
+The camera-ready paper uses these four figures. `figures/legacy/fig5_draft_sensitivity_overview.png` preserves the older draft mapping and is not a paper figure.
 
 ## Reproducing the analyses
 
-Create an environment and install dependencies:
+Create and activate a Python 3.10+ environment, then install dependencies:
 
 ```bash
 python -m venv .venv
-```
-
-Activate it using the command appropriate for your operating system, then run:
-
-```bash
 pip install -r requirements.txt
 ```
 
-From the repository root:
+From the repository root, run one command per script:
 
 ```bash
 python analysis/descriptive_analysis.py
@@ -203,23 +137,17 @@ python analysis/sensitivity_analysis.py
 python analysis/robustness_analysis.py
 python analysis/monte_carlo_robustness.py
 python analysis/generate_figures.py
+python analysis/validate_camera_ready.py
 ```
 
-Generated tables are written to `results/`; figures are written to `figures/`.
+Generated tables are written to `results/`; figures are written to `figures/`. The validator checks the published headline values, weighting scenarios, Monte Carlo grid, and four canonical figures.
 
-## Important methodological notes
+## Evidence records and interpretation
 
-The 30-benchmark sample is purposive and was intentionally capped to support manual evidence retrieval and cell-level assessment. It is not a representative census of all responsible-AI benchmarks.
+`data/evidence_log.csv` contains one record per benchmark-dimension cell linking the three scoring layers to available public evidence and decision rationales. These summaries are audit records, not complete reproductions of third-party documentation and not verbatim excerpts unless explicitly marked.
 
-The operationalized rescoring was post-hoc and involved renewed examination of public evidence. Differences from the primary layer may therefore reflect both changed evidentiary thresholds and newly located evidence.
-
-The equal-weight total is a transparent descriptive summary rather than a validated latent measure. Benchmark-level ranks should not be interpreted as precise league-table positions.
-
-## Third-party materials
-
-This repository records public evidence about third-party benchmarks. It does not claim ownership of those benchmarks, their datasets, source code, documentation, or other third-party materials. Original licenses and terms continue to govern those materials.
+The equal-weight total is a transparent descriptive summary rather than a validated latent measure. Benchmark ranks should not be interpreted as precise league-table positions. Original licenses and terms govern all third-party benchmark materials.
 
 ## Citation
 
 Citation metadata are provided in `CITATION.cff`.
-

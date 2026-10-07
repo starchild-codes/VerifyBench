@@ -99,21 +99,21 @@ for j, dimension in enumerate(DIMENSIONS):
 #
 # Dimension order follows DIMENSIONS above.
 SCENARIOS = {
-    "Equal weights": np.ones(10),
-    "Access emphasis": np.array(
-        [1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    "Baseline": np.ones(10),
+    "Reproduction": np.array(
+        [1.25, 1.25, 1.25, 1.25, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
     ),
-    "Reproducibility emphasis": np.array(
-        [1.0, 1.0, 1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
-    ),
-    "Documentation emphasis": np.array(
+    "Documentation": np.array(
         [1.0, 1.0, 1.0, 1.0, 1.25, 1.25, 1.25, 1.25, 1.0, 1.0]
     ),
-    "Lifecycle/reuse emphasis": np.array(
+    "Lifecycle/reuse": np.array(
         [1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.5, 1.5]
     ),
-    "Reduced access weight": np.array(
-        [0.5, 0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    "Artifact access": np.array(
+        [1.5, 1.5, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0]
+    ),
+    "Operational completeness": np.array(
+        [1.0, 1.0, 1.25, 1.25, 1.0, 1.0, 1.0, 1.25, 1.25, 1.25]
     ),
 }
 
@@ -136,7 +136,7 @@ for name, weights in SCENARIOS.items():
 
 def write_csv(path, rows):
     with path.open("w", newline="", encoding="utf-8") as f:
-        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n")
         writer.writeheader()
         writer.writerows(rows)
 

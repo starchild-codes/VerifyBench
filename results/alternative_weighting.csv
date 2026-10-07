@@ -1,7 +1,7 @@
 Scenario,Spearman Rho with Primary,Mean Absolute Rank Displacement,Median Absolute Rank Displacement,Maximum Absolute Rank Displacement
-Equal weights,1.0,0.0,0.0,0.0
-Access emphasis,1.0,0.0,0.0,0.0
-Reproducibility emphasis,0.994,0.5,0.0,3.5
-Documentation emphasis,0.993,0.5,0.25,3.5
-Lifecycle/reuse emphasis,0.997,0.37,0.0,2.0
-Reduced access weight,1.0,0.0,0.0,0.0
+Baseline,1.0,0.0,0.0,0.0
+Reproduction,0.994,0.5,0.0,3.5
+Documentation,0.993,0.5,0.25,3.5
+Lifecycle/reuse,0.997,0.37,0.0,2.0
+Artifact access,1.0,0.0,0.0,0.0
+Operational completeness,0.993,0.63,0.5,3.5

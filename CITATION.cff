@@ -2,11 +2,13 @@ cff-version: 1.2.0
 message: "If you use VerifyBench, please cite the accompanying paper."
 title: "VerifyBench: Auditing Public Verifiability in Responsible-AI Benchmarks for Foundation Models"
 type: software
-version: "1.0.0"
-date-released: "2026-08-13"
+version: "1.1.0"
+date-released: "2026-10-07"
 authors:
-  - family-names: "Anonymous"
-    given-names: "Submission"
+  - family-names: "Srivastava"
+    given-names: "Anshima"
+    affiliation: "Bhavdiya Public School"
+repository-code: "https://github.com/starchild-codes/VerifyBench"
 abstract: "Reproducibility package for VerifyBench, a structured audit of public verifiability across 30 responsible-AI benchmarks for language and foundation models."
 keywords:
   - AI assurance

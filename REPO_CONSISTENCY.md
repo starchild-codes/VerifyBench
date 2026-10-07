@@ -1,60 +1,68 @@
-# VerifyBench Repository Consistency Note
+# VerifyBench Camera-Ready Consistency Note
 
-This repository should use the following results as the final source of truth for the manuscript.
+This file records the camera-ready source of truth for IEEE TPS 2026.
 
-## Primary audit
-- 30 benchmarks × 10 dimensions = 300 decisions
-- Mean total score: 16.03 / 20
-- Median: 16
-- Range: 11–19
-- Benchmarks scoring 18–20: 5
+## Canonical matrices
 
-## Primary reliability
-- Same purposive 15-benchmark subset, 150 paired decisions
-- Exact agreement: 76.0%
-- Cohen's kappa: 0.490
-- Linear-weighted kappa: 0.508
-- Primary disagreements were adjudicated; adjudicated values are used in the primary analysis.
+- Primary: `data/verifybench_primary_scores_canonical.csv`
+- Lenient: `data/lenient_scores.csv`
+- Operationalized: `data/operationalized_scores.csv`
 
-## Operationalized reliability
-- Same 15-benchmark subset and same coder pair
-- Exact agreement: 78.0%
-- Cohen's kappa: 0.574
-- Linear-weighted kappa: 0.574
+Do not alter these matrices to make derived results fit.
 
-## Sensitivity analyses
-- Full lenient mean: 19.47; median 20; range 18–20
-- Lenient Spearman rho with primary: 0.325
-- Lenient mean absolute rank displacement: 6.77
-- Operationalized mean: 15.97; median 16; range 12–19
-- Operationalized Spearman rho with primary: 0.088
-- Operationalized mean absolute rank displacement: 9.23
+## Headline results
+
+| Layer | Mean | Median | Range | Benchmarks scoring 18–20 | Totals changed from primary | Spearman ρ with primary | Mean absolute rank displacement |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| Primary | 16.03 | 16 | 11–19 | 5 | — | 1.000 | 0.00 |
+| Lenient | 19.47 | 20 | 18–20 | 30 | 29 | 0.325 | 6.77 |
+| Operationalized | 15.97 | 16 | 12–19 | 6 | 26 | 0.088 | 9.23 |
+
+Operationalized changes comprise 13 increases, 13 decreases, and 4 unchanged totals.
+
+## Reliability and adjudication
+
+- Primary, 150 paired decisions: 76.0% exact agreement; Cohen's κ = 0.490; linear-weighted κ = 0.508.
+- Operationalized, the same 150 paired decisions: 78.0% exact agreement; Cohen's κ = 0.574; linear-weighted κ = 0.574.
+
+Primary disagreements were adjudicated, and adjudicated values feed the primary analysis. For the operationalized layer, Coder 2 is used only for reliability estimation. Coder 1's frozen scores feed the complete 30-benchmark analysis. Operationalized disagreements were not converted into a consensus layer; the other 15 operationalized benchmarks were single-coded.
 
 ## Deterministic robustness
-Leave-one-dimension-out analysis was recomputed from the final canonical primary matrix using tied average ranks.
 
-- Most influential removal: Evaluation Code Public
-- Mean absolute rank displacement: 2.87 positions
-- Spearman rho with the full equal-weight totals: 0.916
+Removing Evaluation Code Public is the most influential leave-one-dimension-out test: mean absolute rank displacement = 2.87 and Spearman ρ with the full equal-weight ordering = 0.916.
 
-Alternative weighting stress tests currently released in `analysis/robustness_analysis.py` are explicit reproducibility-package scenarios rather than empirically estimated weights. Across the non-baseline scenarios, Spearman rho with the equal-weight primary ordering is 0.993–1.000.
+Camera-ready Table III uses these five non-baseline scenarios; all unspecified dimensions retain weight 1.00:
+
+| Scenario | Changed weights | Spearman ρ |
+|---|---|---:|
+| Reproduction | Items, Labels, Scoring Method, Evaluation Code = 1.25 | 0.994 |
+| Documentation | Construct, Coverage, Annotation, Limitations = 1.25 | 0.993 |
+| Lifecycle/reuse | Versioning/Maintenance, License/Reuse = 1.50 | 0.997 |
+| Artifact access | Items, Labels = 1.50 | 1.000 |
+| Operational completeness | Scoring Method, Evaluation Code, Limitations, Versioning/Maintenance, License/Reuse = 1.25 | 0.993 |
+
+These are transparent sensitivity settings, not empirically estimated weights.
 
 ## Monte Carlo robustness
-10,000 simulations per uncertainty level using fixed seed 20260813. Independent Gaussian perturbations were added to primary cell scores, then rounded to the nearest ordinal category and clipped to 0–2.
 
-- sigma = 0.10: mean Spearman rho ≈ 1.000; mean absolute rank displacement ≈ 0
-- sigma = 0.25: mean Spearman rho = 0.927; 95% simulation interval 0.846–0.979; mean absolute rank displacement = 1.96
-- sigma = 0.50: mean Spearman rho = 0.664; 95% simulation interval 0.454–0.834; mean absolute rank displacement = 5.25
-- sigma = 0.75: mean Spearman rho = 0.517; 95% simulation interval 0.229–0.747; mean absolute rank displacement = 6.45
-- sigma = 1.00: mean Spearman rho = 0.415; 95% simulation interval 0.101–0.686; mean absolute rank displacement = 7.21
+The canonical sigma grid is `{0.25, 0.43, 0.50, 0.75, 1.00}` with 10,000 simulations per sigma and seed `20260813`. Independent Gaussian cell perturbations are rounded to the nearest ordinal category and clipped to [0, 2]. Tied average ranks, Spearman correlation with unperturbed primary totals, mean absolute rank displacement, and the central 95% simulation interval are reported.
 
-The Monte Carlo analysis is a model-based stress test, not an empirical estimate of the true coder-error distribution.
+Sigma 0.43 heuristically calibrates the ±0.5 threshold-crossing probability to the primary exercise's 24% coder-disagreement rate. Sigma 0.10 is excluded because it almost never changes a rounded score. Boundary clipping is asymmetric at 0 and 2, so this is a model-based stress test rather than an empirical coder-error model.
 
-## Evidence-record wording
-The released evidence log contains dimension-specific evidence summaries and decision rationales. Unless a record is explicitly marked as verbatim, the repository and manuscript should not describe all 300 records as “verbatim evidence excerpts.”
+The observed primary-to-operationalized ρ = 0.088 is much lower than the Monte Carlo mean ρ at σ = 1.00 (about 0.414). The tested random-noise model therefore cannot explain the implemented protocol shift.
 
-## Important version-control rules
-- Do not use earlier workbooks containing primary reliability values of 78.7% exact agreement or Cohen's kappa = 0.547 as final repository evidence.
-- Do not use the earlier stale claim that removing License/Reuse Clear caused a mean absolute rank displacement of 6.1 positions.
-- The current reproducible leave-one-dimension-out result is Evaluation Code Public, mean absolute rank displacement 2.87, rho 0.916.
-- The canonical primary matrix remains `data/verifybench_primary_scores_canonical.csv`.
+The repository implementation uses one NumPy `default_rng` stream consumed sequentially in sigma order. Regeneration produces:
+
+| Sigma | Mean ρ | Central 95% interval | Mean absolute rank displacement |
+|---:|---:|---:|---:|
+| 0.25 | 0.928 | 0.848–0.979 | 1.95 |
+| 0.43 | 0.716 | 0.519–0.863 | 4.77 |
+| 0.50 | 0.664 | 0.454–0.834 | 5.25 |
+| 0.75 | 0.517 | 0.229–0.747 | 6.45 |
+| 1.00 | 0.415 | 0.101–0.686 | 7.21 |
+
+The manuscript-rounded targets for the first three rows were 0.927 (0.847–0.980; 1.95), 0.719 (0.529–0.861; 4.75), and 0.662 (0.444–0.830; 5.25). The mismatch is retained and disclosed rather than resolved by hand-editing generated numbers.
+
+## Figures
+
+The camera-ready paper maps to four canonical outputs: `figures/fig1.png` through `figures/fig4.png`. Any older fifth figure is legacy and not part of the final paper mapping.

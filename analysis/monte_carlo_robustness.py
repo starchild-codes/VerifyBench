@@ -14,6 +14,14 @@ Protocol:
   unperturbed primary totals.
 - 10,000 simulations are run at each sigma.
 - Fixed seed: 20260813.
+- A single NumPy Generator stream is consumed sequentially in SIGMAS order.
+
+The sigma=0.43 setting is a heuristic calibration to the primary exercise's
+24% coder-disagreement rate. For an interior ordinal category, Gaussian noise
+with sigma approximately 0.43 crosses a +/-0.5 rounding threshold with
+probability about 0.24. Boundary clipping makes perturbations asymmetric for
+saturated dimensions, so this remains a model-based stress test rather than an
+empirical model of coder error.
 """
 
 import csv
@@ -23,7 +31,7 @@ from pathlib import Path
 
 INPUT = Path("data/verifybench_primary_scores_canonical.csv")
 OUTPUT = Path("results/monte_carlo_results.csv")
-SIGMAS = [0.10, 0.25, 0.50, 0.75, 1.00]
+SIGMAS = [0.25, 0.43, 0.50, 0.75, 1.00]
 N_SIMS = 10_000
 SEED = 20260813
 
@@ -66,7 +74,7 @@ for sigma in SIGMAS:
 
 OUTPUT.parent.mkdir(parents=True, exist_ok=True)
 with OUTPUT.open("w", newline="", encoding="utf-8") as f:
-    writer = csv.DictWriter(f, fieldnames=results[0].keys())
+    writer = csv.DictWriter(f, fieldnames=results[0].keys(), lineterminator="\n")
     writer.writeheader()
     writer.writerows(results)
 
